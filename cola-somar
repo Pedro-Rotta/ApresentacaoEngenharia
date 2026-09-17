@@ -1,0 +1,20 @@
+// criar arquivo somar.js
+function somar(a, b){
+    return a+b;
+}
+
+// Em index.html
+//  abrir espaço após a linha 33 e na nova linha adicionar:
+<button class="btn btn-operator" id ="add">+</button>
+
+// Antes do main.js, na linha 46:
+<script src="js/operations/somar.js"></script>
+// Em main.js:
+//  Acrescentar na linha 14:
+somar: '+'
+// Acrescentar no switch-case na linha 51:
+case 'somar':       resultado = somar(prev, current); break;
+// Acrescentar depois da linha 104:
+document.getElementById('add').addEventListener('click', () => tratarOperador('somar'));
+//  Acrescentar no KeyDown da linha 116:
+else if (e.key === '+') tratarOperador('somar');
