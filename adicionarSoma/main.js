@@ -12,7 +12,7 @@ function updateDisplay() {
   currentDisplay.textContent = state.current;
   if (state.operator && state.previous) {
     const opSymbol = { subtrair: '−', dividir: '÷', multiplicar: '×', somar: '+' }[state.operator] || '';
-    previousDisplay.textContent = ${state.previous} ${opSymbol};
+    previousDisplay.textContent = `${state.previous} ${opSymbol}`;
   } else {
     previousDisplay.textContent = state.previous;
   }
