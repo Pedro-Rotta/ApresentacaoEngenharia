@@ -11,7 +11,7 @@ const previousDisplay = document.getElementById('previous');
 function updateDisplay() {
   currentDisplay.textContent = state.current;
   if (state.operator && state.previous) {
-    const opSymbol = { subtrair: '−', dividir: '÷', multiplicar: '×' }[state.operator] || '';
+    const opSymbol = { subtrair: '−', dividir: '÷', multiplicar: '×', somar: '+' }[state.operator] || '';
     previousDisplay.textContent = `${state.previous} ${opSymbol}`;
   } else {
     previousDisplay.textContent = state.previous;
@@ -52,6 +52,7 @@ function tratarOperador(op) {
       case 'subtrair':    resultado = subtrair(prev, current); break;
       case 'dividir':     resultado = dividir(prev, current); break;
       case 'multiplicar': resultado = multiplicar(prev, current); break;
+      case 'somar':       resultado = somar(prev, current); break;
     }
 
     state.current = String(resultado);
@@ -74,6 +75,7 @@ function tratarIgual() {
     case 'subtrair':    resultado = subtrair(prev, current); break;
     case 'dividir':     resultado = dividir(prev, current); break;
     case 'multiplicar': resultado = multiplicar(prev, current); break;
+    case 'somar':       resultado = somar(prev, current); break;
   }
 
   state.current = String(resultado);
@@ -102,6 +104,7 @@ document.getElementById('decimal').addEventListener('click', inputDecimal);
 document.getElementById('subtract').addEventListener('click', () => tratarOperador('subtrair'));
 document.getElementById('divide').addEventListener('click', () => tratarOperador('dividir'));
 document.getElementById('multiply').addEventListener('click', () => tratarOperador('multiplicar'));
+document.getElementById('add').addEventListener('click', () => tratarOperador('somar'));
 document.getElementById('percent').addEventListener('click', tratarPorcentagem);
 document.getElementById('equals').addEventListener('click', tratarIgual);
 document.getElementById('clearAll').addEventListener('click', () => {
@@ -115,6 +118,7 @@ document.getElementById('backspace').addEventListener('click', () => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key >= '0' && e.key <= '9') inputNumber(e.key);
+  else if (e.key === '+') tratarOperador('somar');
   else if (e.key === '.') inputDecimal();
   else if (e.key === '-') tratarOperador('subtrair');
   else if (e.key === '/') { e.preventDefault(); tratarOperador('dividir'); }
